@@ -278,4 +278,17 @@ describe('Gameboard', ()=>{
             ]
         ]))
     })
+
+    it("report", ()=>{
+        const newGameboard = new Gameboard
+        newGameboard.placeShip({ row:0, col:0, length:1, axis:"x" })
+        newGameboard.placeShip({ row:0, col:2, length:2, axis:"x" })
+        newGameboard.ships[1].hit()
+        newGameboard.ships[1].hit()
+        const newShip = new Ship({ length: 2})
+        newShip.hit()
+        newShip.hit()
+        const newShip2 = new Ship({ length: 1})
+        expect(JSON.stringify(newGameboard.report())).toEqual(JSON.stringify({ sunkenShips:[newShip], operationalShips:[newShip2]}))
+    })
 })

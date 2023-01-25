@@ -43,7 +43,16 @@ class Gameboard {
     }
 
     report = () => {
-
+        const sunkenShips = this.ships.filter(ship=>{
+            return ship.isSunk()
+        })
+        const operationalShips = this.ships.filter(ship=>{
+            return !ship.isSunk()
+        })
+        return {
+            sunkenShips,
+            operationalShips
+        }
     }
 }
 
