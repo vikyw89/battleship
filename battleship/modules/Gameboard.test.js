@@ -142,4 +142,140 @@ describe('Gameboard', ()=>{
             ]
         ]))
     })
+    it("receiveAttack missed", () => {
+        const newGameboard = new Gameboard
+        newGameboard.receiveAttack({ row:0, col:0 })
+        expect(JSON.stringify(newGameboard.board)).toEqual(JSON.stringify([
+            [
+                "miss", null, null,
+                null, null, null,
+                null, null, null,
+                null
+            ],
+            [
+              null, null, null,
+              null, null, null,
+              null, null, null,
+              null
+            ],
+            [
+              null, null, null,
+              null, null, null,
+              null, null, null,
+              null
+            ],
+            [
+              null, null, null,
+              null, null, null,
+              null, null, null,
+              null
+            ],
+            [
+              null, null, null,
+              null, null, null,
+              null, null, null,
+              null
+            ],
+            [
+              null, null, null,
+              null, null, null,
+              null, null, null,
+              null
+            ],
+            [
+              null, null, null,
+              null, null, null,
+              null, null, null,
+              null
+            ],
+            [
+              null, null, null,
+              null, null, null,
+              null, null, null,
+              null
+            ],
+            [
+              null, null, null,
+              null, null, null,
+              null, null, null,
+              null
+            ],
+            [
+              null, null, null,
+              null, null, null,
+              null, null, null,
+              null
+            ]
+        ]))
+    })
+    it("receiveAttack hit", () => {
+        const newGameboard = new Gameboard
+        newGameboard.placeShip({ row:0, col:0, length:1, axis:"x" })
+        newGameboard.receiveAttack({ row:0, col:0 })
+        const newShip = new Ship({ length:1 })
+        newShip.hit()
+        expect(JSON.stringify(newGameboard.ships[0])).toEqual(JSON.stringify(newShip))
+        expect(JSON.stringify(newGameboard.board)).toEqual(JSON.stringify([
+            [
+                "hit", null, null,
+                null, null, null,
+                null, null, null,
+                null
+            ],
+            [
+              null, null, null,
+              null, null, null,
+              null, null, null,
+              null
+            ],
+            [
+              null, null, null,
+              null, null, null,
+              null, null, null,
+              null
+            ],
+            [
+              null, null, null,
+              null, null, null,
+              null, null, null,
+              null
+            ],
+            [
+              null, null, null,
+              null, null, null,
+              null, null, null,
+              null
+            ],
+            [
+              null, null, null,
+              null, null, null,
+              null, null, null,
+              null
+            ],
+            [
+              null, null, null,
+              null, null, null,
+              null, null, null,
+              null
+            ],
+            [
+              null, null, null,
+              null, null, null,
+              null, null, null,
+              null
+            ],
+            [
+              null, null, null,
+              null, null, null,
+              null, null, null,
+              null
+            ],
+            [
+              null, null, null,
+              null, null, null,
+              null, null, null,
+              null
+            ]
+        ]))
+    })
 })
