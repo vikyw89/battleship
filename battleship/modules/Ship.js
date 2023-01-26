@@ -1,15 +1,15 @@
 class Ship {
-    constructor ({ length }) {
-        this.length = length ?? 0
+    constructor ({ length }, self = this) {
+        self.length = length ?? 0
     }
     hits = 0
 
-    isSunk = () => {
-        return ((this.length - this.hits) <= 0)
+    isSunk = (self = this) => {
+        return ((self.length - self.hits) <= 0)
     }
 
-    hit = () => {
-        this.hits++
+    hit = (self = this) => {
+        self.hits++
     }
 
 }

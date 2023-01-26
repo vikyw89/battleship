@@ -1,28 +1,33 @@
 import { Ship } from "./Ship"
 
 class Gameboard {
-    board = [...new Array(10)].map(el=>{
-        return [...new Array(10).fill(null)]
-    })
+    static count = 0
+    static list = []
+    constructor () {
+        this.board = [...new Array(10)].map(el=>{
+            return [...new Array(10).fill(null)]
+        })
+        Gameboard.count++
+        this.ships = []
+        Gameboard.list.push(this)
+    }
 
-    ships = []
-
-    placeShip = (position) =>{
+    placeShip = (position, self = this) =>{
         const { row, col, length, axis } = position
         const newShip = new Ship({ length:length })
-        this.ships.push(newShip)
+        self.ships.push(newShip)
         // placing ship on the board
         switch (axis) {
             case "x":
                 if (col + length > 10) return
                 for (let i = 0; i < length; i++){
-                    this.board[row][col+i] = newShip
+                    self.board[row][col+i] = newShip
                 }
                 break
             case "y":
                 if (row + length > 10) return
                 for (let i = 0; i < length; i++){
-                    this.board[row+i][col] = newShip
+                    self.board[row+i][col] = newShip
                 }
                 break
             default:
@@ -30,23 +35,23 @@ class Gameboard {
         }
     }
 
-    receiveAttack = ({ row, col }) =>{
+    receiveAttack = ({ row, col }, self = this) =>{
         switch (true) {
-            case this.board[row][col] === null:
-                this.board[row][col] = "miss"
+            case self.board[row][col] === null:
+                self.board[row][col] = "miss"
                 break
-            case this.board[row][col] !== null:
-                this.board[row][col].hit()
-                this.board[row][col] = "hit"
+            case self.board[row][col] !== null:
+                self.board[row][col].hit()
+                self.board[row][col] = "hit"
                 break
         }
     }
 
-    report = () => {
-        const sunkenShips = this.ships.filter(ship=>{
+    report = (self = this) => {
+        const sunkenShips = self.ships.filter(ship=>{
             return ship.isSunk()
         })
-        const operationalShips = this.ships.filter(ship=>{
+        const operationalShips = self.ships.filter(ship=>{
             return !ship.isSunk()
         })
         return {
