@@ -1,11 +1,12 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
-import { Gameboard } from "./Gameboard";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { Ship } from "./Ship";
 
 describe('Gameboard', async()=>{
-  afterEach(async()=>{
+  let Gameboard
+  beforeEach(async()=>{
     vi.resetModules()
-    const { Gameboard } = await import("./Gameboard")
+    const mod = await import("./Gameboard")
+    Gameboard = mod.Gameboard
   })
 
   it('board => initialized properly', ()=>{

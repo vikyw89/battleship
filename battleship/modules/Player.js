@@ -12,10 +12,10 @@ class Player {
     }
 
     constructor ({ name, isAI }, self = this){
-        this.name = name
-        this.board = new Gameboard
-        this.isAI = isAI ?? false
-        Player.list.push(this)
+        self.name = name
+        self.board = new Gameboard
+        self.isAI = isAI ?? false
+        Player.list.push(self)
         Player.count++
     }
 

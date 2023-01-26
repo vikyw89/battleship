@@ -1,3 +1,3 @@
-import { Ship } from './modules/Ship.js'
+import styles from "./modules/style.css?inline"
 
 
