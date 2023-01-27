@@ -13,7 +13,7 @@ const PlayerScreen = ({ props, isHidden }) => {
             <div className={styles.gridContainer}>
                 {player.board.board.map((row,index)=>{
                     return row.map((col,index)=>{
-                        return <Cell key={index} props={col}/>
+                        return <Cell key={index} props={col} isHidden={isHidden}/>
                     })
                 })}
             </div>

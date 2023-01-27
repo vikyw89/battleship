@@ -1,9 +1,9 @@
 .container {
-
+    color: black;
 }
 
 .null {
-    
+
 }
 
 .hit {
@@ -16,4 +16,8 @@
 
 .ship {
     background-color: var(--ship-color);
+}
+
+.hidden {
+    background-color: var(--cell-background-color);
 }

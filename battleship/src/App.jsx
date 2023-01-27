@@ -5,9 +5,9 @@ import { Main } from './components/Main'
 import { Footer } from './components/Footer'
 import styles from './App.module.css'
 import { GameOn } from './modules/GameOn'
-
+GameOn.init()
 function App() {
-  GameOn.init()
+
   return (
     <div className={styles.container}>
       <Header/>
