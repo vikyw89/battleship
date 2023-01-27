@@ -18,6 +18,8 @@ class Player {
         Player.list.push(self)
         Player.count++
     }
+    
+    shipYard = []
 
     generateMove = (enemyBoard = Player.list.filter(el=>el!==this)[0].board.board) => {
         // console.log(Player.list[0].board.board)

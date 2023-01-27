@@ -8,31 +8,41 @@ class Gameboard {
             return [...new Array(10).fill(null)]
         })
         Gameboard.count++
-        this.ships = []
         Gameboard.list.push(this)
     }
-
-    placeShip = (position, self = this) =>{
-        const { row, col, length, axis } = position
-        const newShip = new Ship({ length:length })
-        self.ships.push(newShip)
+    ships = []
+    placeShip = (position, ship, self = this) =>{
+        const { row, col, direction } = position
+        const { length } = ship
         // placing ship on the board
-        switch (axis) {
-            case "x":
-                if (col + length > 10) return
+        switch (direction) {
+            case "west":
+                if (col + length > 10) return false
                 for (let i = 0; i < length; i++){
-                    self.board[row][col+i] = newShip
+                    self.board[row][col+i] = ship
                 }
                 break
-            case "y":
-                if (row + length > 10) return
+            case "north":
+                if (row + length > 10) return false
                 for (let i = 0; i < length; i++){
-                    self.board[row+i][col] = newShip
+                    self.board[row+i][col] = ship
                 }
                 break
-            default:
-                return
+            case "east":
+                if (col - length < -1) return false
+                for (let i = 0; i < length; i++){
+                    self.board[row][col-i] = ship
+                }
+                break
+            case "south":
+                if (row - length < -1) return false
+                for (let i = 0; i < length; i++){
+                    self.board[row-i][col] = ship
+                }
+                break
         }
+        self.ships.push(ship)
+        return true
     }
 
     receiveAttack = ({ row, col }, self = this) =>{

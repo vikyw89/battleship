@@ -11,7 +11,6 @@ class Ship {
     hit = (self = this) => {
         self.hits++
     }
-
 }
 
 export { Ship }

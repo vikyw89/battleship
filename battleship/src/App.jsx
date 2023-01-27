@@ -1,12 +1,19 @@
+import React from 'react'
 import { useState } from 'react'
-import './App.css'
+import { Header } from './components/Header'
+import { Main } from './components/Main'
+import { Footer } from './components/Footer'
+import styles from './App.module.css'
+import { GameOn } from './modules/GameOn'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  GameOn.init()
   return (
-    <div className="App">
-      
+    <div className={styles.container}>
+      <Header/>
+      <Main/>
+        Test
+      <Footer/>
     </div>
   )
 }
