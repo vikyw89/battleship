@@ -1,12 +1,24 @@
+import React from 'react'
+import { Header } from './components/Header'
+import { Main } from './components/Main'
+import { Footer } from './components/Footer'
+import styles from './App.module.css'
 import { useState } from 'react'
-import './App.css'
+import { Battleship } from './modules/Battleship'
+import { BattleshipContext, SetBattleshipContext } from './components/BattleshipContext'
 
+Battleship.init()
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [battleship, setBattleship] = useState({model:Battleship})
   return (
-    <div className="App">
-      
+    <div className={styles.container}>
+      <Header/>
+        <BattleshipContext.Provider value={battleship}>
+          <SetBattleshipContext.Provider value={setBattleship}>
+            <Main/>
+          </SetBattleshipContext.Provider>
+        </BattleshipContext.Provider>
+      <Footer/>
     </div>
   )
 }
