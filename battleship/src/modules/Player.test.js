@@ -19,8 +19,9 @@ describe("Player", ()=>{
         const player1 = new Player({ name: "test"})
         const computer = new Player({ name: "computer", isAI:true })
         player1.board.board = [...new Array(10)].map(el=>{
-            return [...new Array(10).fill("miss")]
+            return [...new Array(10).fill("hit")]
         })
+
         player1.board.board[0][0] = null
         const result = computer.generateMove()
         expect(result).toEqual({col:0, row:0})
@@ -29,15 +30,19 @@ describe("Player", ()=>{
     it('nextTurn => return next turn', ()=>{
         const player1 = new Player({ name: "test"})
         const computer = new Player({ name: "computer", isAI:true })
-        expect(Player.nextTurn()).toEqual(player1)
         expect(Player.nextTurn()).toEqual(computer)
+        expect(Player.nextTurn()).toEqual(player1)
     })
 
     it('registerMove => registering activePlayer move unto enemy board and call next Turn', ()=>{
         const player1 = new Player({ name: "test"})
         const computer = new Player({ name: "computer", isAI:true })
-        expect(Player.registerMove({row:0,col:0})).toEqual(true)
+        expect(player1.registerMove({row:0,col:0})).toEqual(true)
         expect(Player.turnCount).toEqual(1)
-        console.log(computer.board.board)
+    })
+
+    it('checkWinner =>', ()=>{
+        const player1 = new Player({ name: "test"})
+        const computer = new Player({ name: "computer", isAI:true })
     })
 })

@@ -28,7 +28,8 @@ const Cell = ({ content, datakey, props }) => {
     const handleClick = (e) => {
         e.stopPropagation()
         if (!isAI) return
-        registerMove({row:row,col:col})
+        if (content === 'miss' || content === 'hit') return
+        Battleship.registerMove({row:row,col:col})
         setBattleship({model:Battleship})
     }
 

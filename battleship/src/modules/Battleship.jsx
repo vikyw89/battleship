@@ -5,9 +5,11 @@ import { Ship } from "./Ship"
 class Battleship {
     static player1 = new Player({ name: 'Player 1'})
     static player2 = new Player({ name:'Computer', isAI:true})
+
     static get turn() {
         return Player.turn
     }
+
     static set turn(arg) {
         Player.turn = arg
     }
@@ -20,8 +22,10 @@ class Battleship {
     static registerMove = (position, self=this)=>{
         const player = self.turn
         player.registerMove(position)
+        player.checkWinner()
         const AI = self.player2
         AI.registerMove()
+        AI.checkWinner()
         return true
     }
 

@@ -4,7 +4,7 @@ import { Cell } from './Cell'
 import { ShipYard } from './ShipYard'
 
 const PlayerScreen = (props) => {
-    const { board, generateMove, isAI, name, registerMove, shipYard } = props.player
+    const { board, generateMove, isAI, name, registerMove, shipYard, hasWon } = props.player
 
     return (
         <div className={styles.container}>
