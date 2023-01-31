@@ -1,12 +1,12 @@
 import styles from './Cell.module.css'
 import React from 'react'
-import { useState } from 'react'
 
-const Cell = ({ props, isHidden }) => {
-    const [cell, setCell] = useState(props)
+const Cell = ({ content, datakey, props }) => {
+    const {row, col} = datakey
+    const { board, generateMove, isAI, name, registerMove, shipYard } = props.player
     let activeClass
     let display
-    switch (props) {
+    switch (content) {
         case null:
             activeClass = styles.null
             break
@@ -17,12 +17,20 @@ const Cell = ({ props, isHidden }) => {
             activeClass = styles.hit
             break
         default:
-            console.log(isHidden)
-            activeClass = isHidden ? 'hidden' : `${styles.ship} ${props.isSunk() ? 'sunk' : ''}`
+            activeClass = isAI ? 'hidden' : `${styles.ship} ${content.isSunk ? 'sunk' : ''}`
             break
     }
+
+    const handleClick = (e) => {
+        e.stopPropagation()
+        if (!isAI) return
+        registerMove({row:row,col:col})
+        console.log('move')
+        console.log(BattleshipStore.listeners)
+    }
+
     return (
-        <div className={`${styles.container} ${activeClass}`}>
+        <div className={`${styles.container} ${activeClass}`} onClick={handleClick}>
             {display}
         </div>
     )

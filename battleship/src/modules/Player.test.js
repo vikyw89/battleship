@@ -10,9 +10,9 @@ describe("Player", ()=>{
 
     it("list => correct amount of player in the list", ()=> {
         const player1 = new Player({name:"viky"})
-        expect(Player.count).toEqual(1)
+        expect(Player.list.length).toEqual(1)
         new Player({name:"computer"})
-        expect(Player.count).toEqual(2)
+        expect(Player.list.length).toEqual(2)
     })
     
     it("generateMove => generate legal move", () => {
@@ -24,5 +24,20 @@ describe("Player", ()=>{
         player1.board.board[0][0] = null
         const result = computer.generateMove()
         expect(result).toEqual({col:0, row:0})
+    })
+
+    it('nextTurn => return next turn', ()=>{
+        const player1 = new Player({ name: "test"})
+        const computer = new Player({ name: "computer", isAI:true })
+        expect(Player.nextTurn()).toEqual(player1)
+        expect(Player.nextTurn()).toEqual(computer)
+    })
+
+    it('registerMove => registering activePlayer move unto enemy board and call next Turn', ()=>{
+        const player1 = new Player({ name: "test"})
+        const computer = new Player({ name: "computer", isAI:true })
+        expect(Player.registerMove({row:0,col:0})).toEqual(true)
+        expect(Player.turnCount).toEqual(1)
+        console.log(computer.board.board)
     })
 })

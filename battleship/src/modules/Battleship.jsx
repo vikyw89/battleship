@@ -1,16 +1,27 @@
 import { Player } from "./Player"
 import { Ship } from "./Ship"
 
-class GameOn {
+class Battleship {
+    static player1 = new Player({ name: 'Player 1'})
+    static player2 = new Player({ name:'Computer', isAI:true})
+    static get turn() {
+        return Player.turn
+    }
+    static set turn(arg) {
+        Player.turn = arg
+    }
+
     static init = (self = this) => {
-        self.#populatePlayers()
         self.#populateStartingShips()
         self.#shippingToOpenSea()
     }
 
-    static #populatePlayers = (self = this) => {
-        self.Player1 = new Player({ name: 'Player 1'})
-        self.Player2 = new Player({ name:'Computer', isAI:true})
+    static registerMove = (position, self=this)=>{
+        const player = self.turn
+        player.registerMove(position)
+        const AI = self.player2
+        AI.registerMove()
+        return true
     }
 
     static #populateStartingShips = (players = Player.list, ship = Ship) => {
@@ -38,7 +49,6 @@ class GameOn {
                 if (before !== after) {
                     player.shipYard.shift()
                 }
-
             }
         }
         return true
@@ -57,4 +67,4 @@ class GameOn {
     }
 }
 
-export { GameOn }
+export { Battleship }

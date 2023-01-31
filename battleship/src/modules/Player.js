@@ -2,28 +2,41 @@ import { Gameboard } from "./Gameboard"
 
 class Player {
     static list = []
-    static count = 0
     static turnCount = 0
+    static turn = Player.list[0]
 
     static nextTurn = (self = Player) => {
-        const nowPlaying = self.list[self.turnCount % self.count]
+        self.turn = self.list[self.turnCount % 2]
         self.turnCount++
-        return nowPlaying
+        return self.turn
     }
 
     constructor ({ name, isAI }, self = this){
         self.name = name
         self.board = new Gameboard
         self.isAI = isAI ?? false
+        self.shipYard = []
         Player.list.push(self)
-        Player.count++
+        Player.turn = Player.list[0]
     }
     
-    shipYard = []
+    registerMove = (coordinate, self = this)=>{
+        const enemyBoard = Player.list.filter(el=>el!==self)[0].board
+        if (self.isAI) {
+            enemyBoard.receiveAttack(self.generateMove())
+            Player.nextTurn()
+            return true
+        } else {
+            if (enemyBoard.receiveAttack(coordinate)){
+                Player.nextTurn()
+                return true
+            } else {
+                return false
+            }
+        }
+    }
 
     generateMove = (enemyBoard = Player.list.filter(el=>el!==this)[0].board.board) => {
-        // console.log(Player.list[0].board.board)
-        // make a row col combination that is null given the board
         let availableSpot = []
         for(let i = 0; i < 10; i++) {
             for(let j = 0; j < 10; j++){

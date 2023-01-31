@@ -1,14 +1,14 @@
 import styles from "./Main.module.css"
-import React from 'react'
+import React, { useContext, useEffect, useState, useSyncExternalStore } from 'react'
 import { PlayerScreen } from "./PlayerScreen"
-import { Player } from "../modules/Player"
 
 const Main = () => {
-  const [player1, player2] = Player.list
+  const { player1, player2 } = useContext(battleship)
+  console.log(player1, player2)
   return (
     <div className={styles.container}>
-      <PlayerScreen props={player1}/>
-      <PlayerScreen props={player2} isHidden={true}/>
+      <PlayerScreen player={player1}/>
+      <PlayerScreen player={player2}/>
     </div>
   )
 }

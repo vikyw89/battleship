@@ -1,16 +1,11 @@
-import { Ship } from "./Ship"
-
 class Gameboard {
-    static count = 0
-    static list = []
-    constructor () {
-        this.board = [...new Array(10)].map(el=>{
+    constructor (self=this) {
+        self.board = [...new Array(10)].map(el=>{
             return [...new Array(10).fill(null)]
         })
-        Gameboard.count++
-        Gameboard.list.push(this)
+        self.ships = []
     }
-    ships = []
+    
     placeShip = (position, ship, self = this) =>{
         const { row, col, direction } = position
         const { length } = ship
@@ -49,20 +44,24 @@ class Gameboard {
         switch (true) {
             case self.board[row][col] === null:
                 self.board[row][col] = "miss"
-                break
+                return true
+            case self.board[row][col] === 'miss':
+                return false
+            case self.board[row][col] === 'hit':
+                return false
             case self.board[row][col] !== null:
                 self.board[row][col].hit()
                 self.board[row][col] = "hit"
-                break
+                return true
         }
     }
 
     report = (self = this) => {
         const sunkenShips = self.ships.filter(ship=>{
-            return ship.isSunk()
+            return ship.isSunk
         })
         const operationalShips = self.ships.filter(ship=>{
-            return !ship.isSunk()
+            return !ship.isSunk
         })
         return {
             sunkenShips,
