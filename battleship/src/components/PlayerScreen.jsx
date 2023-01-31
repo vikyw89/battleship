@@ -7,18 +7,17 @@ const PlayerScreen = (props) => {
     const { board, generateMove, isAI, name, registerMove, shipYard } = props.player
 
     return (
-        <div>Test</div>
-        // <div className={styles.container}>
-        //     <div className={styles.name}>{name}</div>
-        //     <div className={styles.gridContainer}>
-        //         {board.board.map((row,rowIndex)=>{
-        //             return row.map((col,colIndex)=>{
-        //                 return <Cell key={colIndex} content={col} props={props} datakey={{row:rowIndex, col:colIndex}}/>
-        //             })
-        //         })}
-        //     </div>
-        //     <ShipYard props={board.ships}/>
-        // </div>
+        <div className={styles.container}>
+            <div className={styles.name}>{name}</div>
+            <div className={styles.gridContainer}>
+                {board.board.map((row,rowIndex)=>{
+                    return row.map((col,colIndex)=>{
+                        return <Cell key={colIndex} content={col} props={props} datakey={{row:rowIndex, col:colIndex}}/>
+                    })
+                })}
+            </div>
+            <ShipYard props={board.ships}/>
+        </div>
     )
 }
 

@@ -1,7 +1,11 @@
 import styles from './Cell.module.css'
 import React from 'react'
+import { useContext } from 'react'
+import { BattleshipContext, SetBattleshipContext } from './BattleshipContext'
+import { Battleship } from '../modules/Battleship'
 
 const Cell = ({ content, datakey, props }) => {
+    const setBattleship = useContext(SetBattleshipContext)
     const {row, col} = datakey
     const { board, generateMove, isAI, name, registerMove, shipYard } = props.player
     let activeClass
@@ -25,8 +29,7 @@ const Cell = ({ content, datakey, props }) => {
         e.stopPropagation()
         if (!isAI) return
         registerMove({row:row,col:col})
-        console.log('move')
-        console.log(BattleshipStore.listeners)
+        setBattleship({model:Battleship})
     }
 
     return (

@@ -9,18 +9,7 @@ import { BattleshipContext, SetBattleshipContext } from './components/Battleship
 
 Battleship.init()
 function App() {
-  class Test {
-    static test = () => {
-      console.log('test')
-    }
-  }
-  const Test2 = () => {
-    const test = () => {
-      console.log('test2')
-    }
-  }
-  const [battleship2, setBattleship2] = useState(Test2)
-  const [battleship, setBattleship] = useState(Test)
+  const [battleship, setBattleship] = useState({model:Battleship})
   return (
     <div className={styles.container}>
       <Header/>
